@@ -1,0 +1,46 @@
+app-id: org.codex.GokuTeleport
+runtime: org.freedesktop.Platform
+runtime-version: '26.08'
+sdk: org.freedesktop.Sdk
+command: goku-teleport
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=all
+  - --env=PYTHONUNBUFFERED=1
+modules:
+  - name: goku-teleport
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+    build-commands:
+      - python3 -m ensurepip --upgrade
+      - python3 -m pip install --disable-pip-version-check --no-cache-dir --target=/app/lib/goku-teleport/vendor -r requirements.txt
+      - install -Dm644 goku_teleport/__init__.py /app/lib/goku-teleport/goku_teleport/__init__.py
+      - install -Dm644 goku_teleport/__main__.py /app/lib/goku-teleport/goku_teleport/__main__.py
+      - install -Dm644 goku_teleport/app.py /app/lib/goku-teleport/goku_teleport/app.py
+      - install -Dm644 goku_teleport/gesture.py /app/lib/goku-teleport/goku_teleport/gesture.py
+      - install -Dm644 goku_teleport/audio.py /app/lib/goku-teleport/goku_teleport/audio.py
+      - install -Dm644 requirements.txt /app/share/goku-teleport/requirements.txt
+      - install -Dm644 assets/icon.svg /app/share/icons/hicolor/scalable/apps/org.codex.GokuTeleport.svg
+      - install -Dm644 assets/sounds/teleport-whoosh.wav /app/share/goku-teleport/sounds/teleport-whoosh.wav
+      - install -Dm644 org.codex.GokuTeleport.desktop /app/share/applications/org.codex.GokuTeleport.desktop
+      - install -Dm755 packaging/flatpak-launcher.sh /app/bin/goku-teleport
+    sources:
+      - type: dir
+        path: goku_teleport
+        dest: goku_teleport
+      - type: dir
+        path: assets
+        dest: assets
+      - type: dir
+        path: packaging
+        dest: packaging
+      - type: file
+        path: requirements.txt
+      - type: file
+        path: org.codex.GokuTeleport.desktop

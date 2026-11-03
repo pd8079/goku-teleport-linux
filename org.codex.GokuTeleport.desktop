@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Goku Teleport
+Comment=Anime-style webcam teleport effect
+Exec=goku-teleport
+Icon=org.codex.GokuTeleport
+Terminal=false
+Categories=AudioVideo;Video;Graphics;
+StartupNotify=true
+Keywords=webcam;camera;teleport;virtual camera;

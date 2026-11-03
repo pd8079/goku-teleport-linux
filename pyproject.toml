@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "goku-teleport"
+version = "0.1.0"
+description = "A Linux desktop webcam teleport effect with optional V4L2 output"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+  "mediapipe==1.0.1",
+  "numpy>=2.0,<3",
+  "opencv-contrib-python>=4.14,<6",
+  "PySide6-Essentials>=6.10.1,<7",
+  "pyvirtualcam>=0.15,<1",
+]
+
+[project.scripts]
+goku-teleport = "goku_teleport.app:main"
+
+[tool.setuptools]
+packages = ["goku_teleport"]
